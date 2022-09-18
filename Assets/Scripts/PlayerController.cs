@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private float horizontalInput;
-    private float speed = 20.0f;
+    private float speed = 30.0f;
     private float xRange = 20;
     public GameObject projectilePrefab;
 
@@ -14,15 +14,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // Check for left and right bounds
-        if (transform.position.x < -xRange)
-        {
-            transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
-        }
 
-        if (transform.position.x > xRange)
-        {
-            transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
-        }
+        CheckOutOfBounds();  // ABSTRACTION
 
         // Player movement left to right
         horizontalInput = Input.GetAxis("Horizontal");
@@ -45,5 +38,18 @@ public class PlayerController : MonoBehaviour
 
 
 
+    }
+
+    void CheckOutOfBounds()  // ABSTRACTION
+    {
+        if (transform.position.x < -xRange)
+        {
+            transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
+        }
+
+        if (transform.position.x > xRange)
+        {
+            transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
+        }
     }
 }

@@ -6,6 +6,7 @@ public class ObjectPooler : MonoBehaviour
 {
     public static ObjectPooler SharedInstance;
     public List<GameObject> pooledObjects;
+    public GameObject objectToPool2;
     public GameObject objectToPool;
     public int amountToPool;
 
@@ -21,10 +22,21 @@ public class ObjectPooler : MonoBehaviour
         pooledObjects = new List<GameObject>();
         for (int i = 0; i < amountToPool; i++)
         {
-            GameObject obj = (GameObject)Instantiate(objectToPool);
-            obj.SetActive(false);
-            pooledObjects.Add(obj);
-            obj.transform.SetParent(this.transform); // set as children of Spawn Manager
+            if (Random.Range(1.0f, 2.0f) >= 1.5f)
+            {
+                GameObject obj = (GameObject)Instantiate(objectToPool);
+                obj.SetActive(false);
+                pooledObjects.Add(obj);
+                obj.transform.SetParent(this.transform); // set as children of Spawn Manager }
+
+            }
+            else
+            {
+                GameObject obj = (GameObject)Instantiate(objectToPool2);
+                obj.SetActive(false);
+                pooledObjects.Add(obj);
+                obj.transform.SetParent(this.transform); // set as children of Spawn Manager }
+            }
         }
     }
 
